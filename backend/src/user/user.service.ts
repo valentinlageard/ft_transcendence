@@ -22,7 +22,7 @@ export class UserService {
     create(body: CreateUserDto): Promise<User> {
         const user: User = new User();
         user.name = body.name;
-        return this.usersRepository.save(User);
+        return this.usersRepository.save(user);
     }
 
     async remove(id: string): Promise<void> {

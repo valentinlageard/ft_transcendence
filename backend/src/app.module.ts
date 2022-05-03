@@ -8,7 +8,18 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-      TypeOrmModule.forRoot(),
+      TypeOrmModule.forRoot(
+        {
+          "type": "postgres",
+          "host": "db",
+          "port": 5432,
+          "username": "root",
+          "password": "root",
+          "database": "ft_transcendence",
+          "entities": ["dist/**/*.entity{.ts,.js}"],
+          "synchronize": true
+        }
+      ),
       // DefaultAdminModule,
       UserModule
   ],
