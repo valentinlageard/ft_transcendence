@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  db:
+    image: postgres
+    restart: always
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - .env
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  backend:
+    build: ./backend
+    image: backend
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
