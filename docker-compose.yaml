@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.4"
 services:
   db:
     image: postgres
@@ -12,8 +12,14 @@ services:
     ports:
       - 8080:8080
   backend:
-    build: ./backend
-    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
     depends_on:
       - db
     ports:
